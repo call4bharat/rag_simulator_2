@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bharath Gupta | Futuristic Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #070b17;
+      --bg-soft: #0d1325;
+      --panel: rgba(17, 25, 46, 0.78);
+      --line: rgba(102, 178, 255, 0.18);
+      --primary: #57c7ff;
+      --secondary: #7c5cff;
+      --text: #eef4ff;
+      --muted: #9fb0d3;
+      --success: #42f5c8;
+      --shadow: 0 10px 40px rgba(0,0,0,0.45);
+      --radius: 24px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(87, 199, 255, 0.12), transparent 20%),
+        radial-gradient(circle at bottom right, rgba(124, 92, 255, 0.12), transparent 20%),
+        var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 1400px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 28px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(87,199,255,0.6), rgba(124,92,255,0.2));
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .sidebar {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      position: sticky;
+      top: 30px;
+      height: fit-content;
+    }
+
+    .profile {
+      text-align: center;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      font-weight: 800;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .avatar::after {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .role {
+      color: var(--primary);
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: var(--primary);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 22px;
+      height: 2px;
+      background: linear-gradient(to right, var(--primary), transparent);
+    }
+
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .info-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 14px;
+      border-radius: 16px;
+      transition: 0.3s ease;
+    }
+
+    .info-item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(87,199,255,0.3);
+    }
+
+    .info-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .info-value {
+      font-size: 14px;
+      color: var(--text);
+      word-break: break-word;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(87, 199, 255, 0.08);
+      border: 1px solid rgba(87, 199, 255, 0.18);
+      color: var(--primary);
+      font-size: 12px;
+      transition: 0.3s ease;
+    }
+
+    .skill:hover {
+      transform: scale(1.05);
+      background: rgba(87, 199, 255, 0.14);
+    }
+
+    .main {
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .hero {
+      padding: 28px;
+      border-radius: 24px;
+      background:
+        linear-gradient(135deg, rgba(87,199,255,0.1), rgba(124,92,255,0.08));
+      border: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(87,199,255,0.18), transparent 70%);
+      top: -120px;
+      right: -120px;
+    }
+
+    .hero h1 {
+      font-size: 46px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      max-width: 700px;
+    }
+
+    .gradient {
+      background: linear-gradient(to right, var(--primary), #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 760px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .panel {
+      padding: 26px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: 0.3s ease;
+    }
+
+    .panel:hover {
+      transform: translateY(-4px);
+      border-color: rgba(87,199,255,0.2);
+    }
+
+    .timeline {
+      position: relative;
+      margin-top: 18px;
+      padding-left: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--primary), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -22px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 14px var(--primary);
+    }
+
+    .timeline-item h3 {
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+
+    .timeline-item .meta {
+      color: var(--primary);
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .timeline-item p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      text-align: center;
+    }
+
+    .stat h2 {
+      font-size: 26px;
+      color: var(--success);
+      margin-bottom: 6px;
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .footer {
+      margin-top: 10px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: rgba(87,199,255,0.5);
+      box-shadow: 0 0 20px rgba(87,199,255,0.8);
+      animation: scan 7s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes scan {
+      0% {
+        top: 0;
+        opacity: 0;
+      }
+      5% {
+        opacity: 1;
+      }
+      95% {
+        opacity: 1;
+      }
+      100% {
+        top: 100%;
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: relative;
+        top: unset;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 18px;
+      }
+
+      .main,
+      .sidebar {
+        padding: 22px;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="scanline"></div>
+
+  <div class="container">
+
+    <aside class="card sidebar">
+      <div class="profile">
+        <div class="avatar">BG</div>
+        <div class="name">Bharath Gupta</div>
+        <div class="role">Project Manager • Retail Industry</div>
+      </div>
+
+      <section>
+        <div class="section-title">Contact</div>
+
+        <div class="info-list">
+          <div class="info-item">
+            <div class="info-label">Email</div>
+            <div class="info-value">yourmail@example.com</div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-label">Phone</div>
+            <div class="info-value">+91 XXXXX XXXXX</div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-label">Location</div>
+            <div class="info-value">Bengaluru, Karnataka, India</div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-label">LinkedIn</div>
+            <div class="info-value">linkedin.com/in/yourprofile</div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title">Core Skills</div>
+
+        <div class="skills">
+          <div class="skill">Project Management</div>
+          <div class="skill">Retail Operations</div>
+          <div class="skill">Agile</div>
+          <div class="skill">Stakeholder Management</div>
+          <div class="skill">Business Analysis</div>
+          <div class="skill">Team Leadership</div>
+          <div class="skill">Process Optimization</div>
+          <div class="skill">Data Reporting</div>
+          <div class="skill">JIRA</div>
+          <div class="skill">Scrum</div>
+          <div class="skill">Strategic Planning</div>
+          <div class="skill">Communication</div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title">Education</div>
+
+        <div class="info-list">
+          <div class="info-item">
+            <div class="info-label">Degree</div>
+            <div class="info-value">Add your degree and university here</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">
+        Designed as a futuristic interactive resume • 2026
+      </div>
+    </aside>
+
+    <main class="card main">
+
+      <section class="hero">
+        <h1>
+          Building scalable retail operations through
+          <span class="gradient">execution, leadership & innovation.</span>
+        </h1>
+
+        <p>
+          Project Manager with a strong focus on operational excellence, cross-functional coordination,
+          stakeholder communication, and retail transformation initiatives. Experienced in driving
+          structured execution, improving workflows, and aligning business goals with measurable outcomes.
+          Passionate about building efficient systems, leading teams, and delivering high-impact projects.
+        </p>
+
+        <div class="stats">
+          <div class="stat">
+            <h2 id="exp">0+</h2>
+            <span>Years Experience</span>
+          </div>
+
+          <div class="stat">
+            <h2 id="projects">0+</h2>
+            <span>Projects Delivered</span>
+          </div>
+
+          <div class="stat">
+            <h2 id="teams">0+</h2>
+            <span>Teams Managed</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="grid">
+
+        <section class="panel">
+          <div class="section-title">Experience</div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <h3>Project Manager</h3>
+              <div class="meta">Retail Industry • 20XX — Present</div>
+              <p>
+                Led cross-functional initiatives focused on operational efficiency,
+                execution tracking, and stakeholder alignment. Coordinated project
+                timelines, optimized workflows, and improved communication between
+                business and technical teams.
+              </p>
+            </div>
+
+            <div class="timeline-item">
+              <h3>Operations / Business Role</h3>
+              <div class="meta">Previous Company • 20XX — 20XX</div>
+              <p>
+                Supported retail operations and business process improvements while
+                collaborating with leadership teams to streamline execution and reporting.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="section-title">Achievements</div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <h3>Operational Optimization</h3>
+              <p>
+                Improved project tracking workflows and enhanced visibility for stakeholders,
+                reducing delays and improving accountability.
+              </p>
+            </div>
+
+            <div class="timeline-item">
+              <h3>Team Coordination</h3>
+              <p>
+                Successfully coordinated cross-functional teams across multiple deliverables,
+                ensuring on-time project execution.
+              </p>
+            </div>
+
+            <div class="timeline-item">
+              <h3>Process Improvements</h3>
+              <p>
+                Contributed to process automation and reporting enhancements for better
+                operational insights and faster decision-making.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="section-title">Tools & Platforms</div>
+
+          <div class="skills">
+            <div class="skill">JIRA</div>
+            <div class="skill">Confluence</div>
+            <div class="skill">Excel</div>
+            <div class="skill">Power BI</div>
+            <div class="skill">Notion</div>
+            <div class="skill">Slack</div>
+            <div class="skill">Trello</div>
+            <div class="skill">Google Workspace</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="section-title">Professional Summary</div>
+
+          <p style="line-height: 1.9; color: var(--muted);">
+            Results-driven professional with expertise in project execution,
+            operational strategy, retail workflows, and stakeholder collaboration.
+            Strong ability to bridge business requirements with execution teams while
+            maintaining focus on timelines, quality, and measurable outcomes.
+            Adept at managing ambiguity, solving operational challenges, and driving
+            continuous improvement.
+          </p>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const counters = [
+      { id: 'exp', target: 5, suffix: '+' },
+      { id: 'projects', target: 25, suffix: '+' },
+      { id: 'teams', target: 8, suffix: '+' },
+    ];
+
+    counters.forEach(counter => {
+      const el = document.getElementById(counter.id);
+      let count = 0;
+
+      const update = () => {
+        if (count < counter.target) {
+          count++;
+          el.innerText = count + counter.suffix;
+          requestAnimationFrame(update);
+        }
+      };
+
+      update();
+    });
+
+    document.querySelectorAll('.panel, .info-item, .skill').forEach(item => {
+      item.addEventListener('mousemove', e => {
+        const rect = item.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        item.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(87,199,255,0.12), rgba(255,255,255,0.02))`;
+      });
+
+      item.addEventListener('mouseleave', () => {
+        item.style.background = '';
+      });
+    });
+  </script>
+</body>
+</html>
